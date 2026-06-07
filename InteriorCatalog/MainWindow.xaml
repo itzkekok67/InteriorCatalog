@@ -1,0 +1,275 @@
+﻿<Window x:Class="InteriorCatalog.MainWindow"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+Title="Interior Catalog"
+Height="450"
+Width="580"
+WindowStartupLocation="CenterScreen"
+Background="#1A1A2E">
+
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="PrimaryColor" Color="#6C63FF"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#FF6584"/>
+        <SolidColorBrush x:Key="DarkBg" Color="#16213E"/>
+        <SolidColorBrush x:Key="CardBg" Color="#0F3460"/>
+        <SolidColorBrush x:Key="TextLight" Color="#E8E8E8"/>
+        <SolidColorBrush x:Key="TextDim" Color="#A0A0C0"/>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{StaticResource TextLight}"/>
+            <Setter Property="Background" Value="{StaticResource CardBg}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="0,5,0,12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Background" Value="{StaticResource CardBg}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextLight}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Blue"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Blue"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <!-- фон -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#1A1A2E" Offset="0"/>
+                <GradientStop Color="#16213E" Offset="0.5"/>
+                <GradientStop Color="#0F3460" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Ellipse Width="280" Height="280" Fill="#6C63FF" Opacity="0.07"
+HorizontalAlignment="Left" VerticalAlignment="Top"
+Margin="-100,-80,0,0"/>
+
+        <Ellipse Width="240" Height="240" Fill="#FF6584" Opacity="0.06"
+HorizontalAlignment="Right" VerticalAlignment="Bottom"
+Margin="0,0,-80,0"/>
+
+        <Border Margin="20" Background="#0A0F1F" CornerRadius="20" Opacity="0.75"/>
+
+        <Grid Margin="30">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- заголовок -->
+            <StackPanel Margin="0,0,0,20">
+                <TextBlock Text="✨ Interior Catalog"
+FontSize="24"
+FontWeight="Bold"
+Foreground="{StaticResource TextLight}"/>
+
+                <TextBlock Text="Ваш каталог мебели"
+FontSize="12"
+Foreground="{StaticResource TextDim}"
+Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <!-- каталог -->
+            <TextBlock Grid.Row="1"
+Text="📁 Выбор каталога"
+Foreground="{StaticResource TextDim}"
+FontWeight="SemiBold"
+Margin="0,5,0,5"/>
+
+            <ComboBox x:Name="CatalogComboBox"
+Grid.Row="2"
+                      Foreground="Black"
+SelectionChanged="CatalogComboBox_SelectionChanged"/>
+
+            <!-- формат -->
+            <Grid Grid.Row="3" Margin="0,5,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="💾 Формат хранения"
+Foreground="{StaticResource TextDim}"
+VerticalAlignment="Center"
+FontWeight="SemiBold"/>
+
+                <ComboBox x:Name="FormatComboBox"
+Grid.Column="1"
+Width="120"
+HorizontalAlignment="Right"
+                          Foreground="Black"
+SelectionChanged="FormatComboBox_SelectionChanged">
+                    <ComboBoxItem Content="JSON"/>
+                    <ComboBoxItem Content="XML"/>
+                </ComboBox>
+            </Grid>
+
+            <!-- кнопки -->
+            <StackPanel Grid.Row="4" Margin="0,15,0,0">
+
+                <Button x:Name="OpenCatalogBtn"
+Content="📖 Показать каталог"
+IsEnabled="False"
+Click="OpenCatalogBtn_Click"
+Background="#6C63FF"
+                        Foreground="Black"
+                        Height="30"
+Margin="0,0,0,12">
+                    <Button.Style>
+                        <Style TargetType="Button">
+
+                            <Setter Property="Template">
+
+                                <Setter.Value>
+
+                                    <ControlTemplate TargetType="Button">
+
+                                        <Border Background="{TemplateBinding Background}"
+
+                        CornerRadius="10">
+
+                                            <ContentPresenter HorizontalAlignment="Center"
+
+                                      VerticalAlignment="Center"/>
+
+                                        </Border>
+
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+
+                            </Setter>
+
+                            <Style.Triggers>
+
+                                <Trigger Property="IsEnabled" Value="False">
+
+                                    <Setter Property="Background" Value="#3A3A5A"/>
+
+                                    <Setter Property="Foreground" Value="#8888AA"/>
+
+                                    <Setter Property="Opacity" Value="0.6"/>
+
+                                </Trigger>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+
+                                    <Setter Property="Opacity" Value="0.9"/>
+
+                                </Trigger>
+
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button x:Name="SaveBtn"
+        Content="💾 Сохранить / Перезагрузить"
+        Click="SaveBtn_Click"
+        Height="30"
+        Margin="0,0,0,0">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+
+                            <!-- БАЗОВЫЙ ЦВЕТ -->
+                            <Setter Property="Background" Value="#FF6584"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10">
+
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- АНИМАЦИЯ (мигание через смену цвета) -->
+                                        <ControlTemplate.Triggers>
+
+                                            <!-- HOVER -->
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="#FF7B99"/>
+                                            </Trigger>
+
+                                            <!-- CLICK -->
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="#E05577"/>
+                                            </Trigger>
+
+                                            <!-- DISABLED -->
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="#5A2A3A"/>
+                                                <Setter Property="Foreground"
+                                        Value="#8888AA"/>
+                                                <Setter Property="Opacity"
+                                        Value="0.6"/>
+                                            </Trigger>
+
+                                        </ControlTemplate.Triggers>
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                        </Style>
+                    </Button.Style>
+
+                </Button>
+
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>

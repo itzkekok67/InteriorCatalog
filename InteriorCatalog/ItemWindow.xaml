@@ -1,0 +1,21 @@
+﻿<Window x:Class="InteriorCatalog.ItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Furniture Item" Height="400" Width="400">
+
+    <Grid Margin="10">
+
+        <StackPanel>
+
+            <Image x:Name="ItemImage"
+                   Height="200"
+                   Margin="0,0,0,10"/>
+
+            <TextBlock x:Name="InfoText"
+                       FontSize="14"
+                       TextWrapping="Wrap"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
